@@ -1,17 +1,20 @@
+//pull in modules
+const fs = require('fs');
+const http = require('http');
+const url = require('url');
+const generatePage = require('./src/generate-page.js');
+//get info from command line following the node and application commands
 const profileDataArgs = process.argv.slice(2);
 
-const printProfileData = profileDataArr => {
-  /***This...
-  for (let i = 0; i < profileDataArr.length; i += 1) {
-   console.log(profileDataArr[i]);
-  }
+//destructure the info to get usable variables
+const [name, github] = profileDataArgs;
 
-console.log('================');*/
+//Function to create HTML string based on name and github username
+//const generatePage = require('./src/generate-page.js');
 
-  // Is the same as this...
-  profileDataArr.forEach(profileItem => {
-      console.log(profileItem)
-    });
-};
+//Take the above function and use it to generate an HTML file --> If error let me know otherwise let me know when job is done
+fs.writeFile('index.html', generatePage(name, github), err => {
+    if (err) throw err;
 
-printProfileData(profileDataArgs);
+    console.log('Portfolio complete! Checkout index.html to see the output!')
+})
